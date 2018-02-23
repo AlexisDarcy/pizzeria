@@ -58,11 +58,15 @@ public class PizzeriaConsole {
 		String code;
 		String nom;
 		double prix;
+		boolean trouver = false;
+		int j = 0;
 		switch (r) {
 		case 1:
 			System.out.println("Liste des pizzas");
 			for(int i = 0; i < Pizza.getCompteur() ; i++){
-				System.out.println(lesPizzas[i].getCode() + " -> " + lesPizzas[i].getLibelle() + " ( " + lesPizzas[i].getPrix() + " € ) ");
+				if(lesPizzas[i] != null){
+					System.out.println(lesPizzas[i].getCode() + " -> " + lesPizzas[i].getLibelle() + " ( " + lesPizzas[i].getPrix() + " € ) ");
+				}
 			};
 			break;
 		case 2:
@@ -77,9 +81,38 @@ public class PizzeriaConsole {
 			break;
 		case 3:
 			System.out.println("Mise à jour d’une pizza");
+			System.out.println("Veuillez choisir le code de la pizza à modifier : ");
+			code = questionUser.next();
+			
+			do{
+				if(code.equals(lesPizzas[j].getCode())){
+					System.out.println("Veuillez saisir le code : ");
+					lesPizzas[j].setCode(questionUser.next());
+					System.out.println("Veuillez saisir le nom (sans espace) : ");
+					lesPizzas[j].setLibelle(questionUser.next());
+					System.out.println("Veuillez saisir le prix : ");
+					lesPizzas[j].setPrix(questionUser.nextDouble());
+					trouver = true;
+				}
+				j++;
+			}while(trouver == false);
 			break;
 		case 4:
 			System.out.println("Suppression d’une pizza");
+			for(int i = 0; i < Pizza.getCompteur() ; i++){
+				if(lesPizzas[i] != null){
+					System.out.println(lesPizzas[i].getCode() + " -> " + lesPizzas[i].getLibelle() + " ( " + lesPizzas[i].getPrix() + " € ) ");
+				}
+			};
+			System.out.println("Veuillez choisir le code de la pizza à supprimer : ");
+			code = questionUser.next();
+			do{
+				if(code.equals(lesPizzas[j].getCode())){
+					lesPizzas[j] = null;
+					trouver = true;
+				}
+				j++;
+			}while(trouver == false);
 			break;
 		case 99:
 			System.out.println("Aurevoir ☹");
