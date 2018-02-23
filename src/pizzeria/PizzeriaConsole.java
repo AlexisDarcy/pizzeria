@@ -65,7 +65,7 @@ public class PizzeriaConsole {
 			System.out.println("Liste des pizzas");
 			for(int i = 0; i < Pizza.getCompteur() ; i++){
 				if(lesPizzas[i] != null){
-					System.out.println(lesPizzas[i].getCode() + " -> " + lesPizzas[i].getLibelle() + " ( " + lesPizzas[i].getPrix() + " € ) ");
+					System.out.println(lesPizzas[i]);
 				}
 			};
 			break;
@@ -101,7 +101,7 @@ public class PizzeriaConsole {
 			System.out.println("Suppression d’une pizza");
 			for(int i = 0; i < Pizza.getCompteur() ; i++){
 				if(lesPizzas[i] != null){
-					System.out.println(lesPizzas[i].getCode() + " -> " + lesPizzas[i].getLibelle() + " ( " + lesPizzas[i].getPrix() + " € ) ");
+					System.out.println(lesPizzas[i]);
 				}
 			};
 			System.out.println("Veuillez choisir le code de la pizza à supprimer : ");
