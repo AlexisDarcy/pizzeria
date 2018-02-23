@@ -8,19 +8,20 @@ public class PizzeriaConsole {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Pizza [] lesPizzas = new Pizza[8];
 		int reponse;
+		Pizza [] lesPizzas = new Pizza[100];
 		Scanner questionUser = new Scanner(System.in);
 		
 		initPizza(lesPizzas);
 		
 		do{
+			
 			afficherMenu();
-			
 			reponse = questionUser.nextInt();
+			reponse(reponse, lesPizzas, questionUser);
 			
-			reponse(reponse, lesPizzas);
 		}while(reponse != 99);
+		
 		questionUser.close();
 		
 	}
@@ -36,11 +37,11 @@ public class PizzeriaConsole {
 		lesPizzas[3] = p4;
 		Pizza p5 = new Pizza("CAN", "La cannibale", 12.50);
 		lesPizzas[4] = p5;
-		Pizza p6 = new Pizza("CAN", "La savoyarde", 13.00);
+		Pizza p6 = new Pizza("SAV", "La savoyarde", 13.00);
 		lesPizzas[5] = p6;
-		Pizza p7 = new Pizza("CAN", "L’orientale", 13.50);
+		Pizza p7 = new Pizza("ORI", "L’orientale", 13.50);
 		lesPizzas[6] = p7;
-		Pizza p8 = new Pizza("CAN", "L’indienne", 14.00);
+		Pizza p8 = new Pizza("IND", "L’indienne", 14.00);
 		lesPizzas[7] = p8;
 	}
 	
@@ -53,16 +54,26 @@ public class PizzeriaConsole {
 		System.out.println("99. Sortir");
 	}
 	
-	public static void reponse(int r, Pizza [] lesPizzas){
+	public static void reponse(int r, Pizza [] lesPizzas, Scanner questionUser){
+		String code;
+		String nom;
+		double prix;
 		switch (r) {
 		case 1:
 			System.out.println("Liste des pizzas");
-			for(int i = 0; i < lesPizzas.length; i++){
+			for(int i = 0; i < Pizza.getCompteur() ; i++){
 				System.out.println(lesPizzas[i].getCode() + " -> " + lesPizzas[i].getLibelle() + " ( " + lesPizzas[i].getPrix() + " € ) ");
 			};
 			break;
 		case 2:
-			System.out.println("Ajout d’une nouvelle pizza");
+			System.out.println("Ajout d’une nouvelle pizza\n");
+			System.out.println("Veuillez saisir le code : ");
+			code = questionUser.next();
+			System.out.println("Veuillez saisir le nom (sans espace) : ");
+			nom = questionUser.next();
+			System.out.println("Veuillez saisir le prix : ");
+			prix = questionUser.nextDouble();
+			lesPizzas[Pizza.getCompteur()] = new Pizza(code, nom, prix);
 			break;
 		case 3:
 			System.out.println("Mise à jour d’une pizza");

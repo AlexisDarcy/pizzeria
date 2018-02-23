@@ -46,4 +46,15 @@ public class Pizza {
 		return id;
 	}
 	
+	public static int getCompteur() {
+		return compteur;
+	}
+	
+	@Override
+	public String toString() {
+		return " " + code + " -> " + libelle + " ( " + prix + " € ) ";
+	}
+
+
+	
 }
