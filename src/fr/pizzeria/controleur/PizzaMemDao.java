@@ -1,13 +1,14 @@
 package fr.pizzeria.controleur;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.pizzeria.model.Pizza;
 
 public class PizzaMemDao implements IPizzaDao {
 	
-	List <Pizza> lesPizzas = new ArrayList<Pizza>();
+	private List <Pizza> lesPizzas = new ArrayList<Pizza>();
 	
 	public PizzaMemDao() {
 		super();
@@ -32,32 +33,58 @@ public class PizzaMemDao implements IPizzaDao {
 
 	@Override
 	public void saveNewPizza(Pizza pizza) {
-		// TODO Auto-generated method stub
+		lesPizzas.add(pizza);
 		
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
-		// TODO Auto-generated method stub
-		
+		Pizza p = null;
+		p = findPizzaByCode(codePizza);
+		p.setCode(pizza.getCode());
+		p.setLibelle(pizza.getLibelle());
+		p.setPrix(pizza.getPrix());
 	}
 
 	@Override
 	public void deletePizza(String codePizza) {
-		// TODO Auto-generated method stub
+		Iterator<Pizza> iterator = lesPizzas.iterator(); 
 		
+		while (iterator.hasNext()){
+			Pizza p = iterator.next();
+			if(p.getCode().equals(codePizza)){
+				iterator.remove();
+			}
+		}
 	}
 
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
-		// TODO Auto-generated method stub
-		return null;
+		Pizza pizzaTrouver = null;
+		Iterator<Pizza> iterator = lesPizzas.iterator(); 
+		
+		while (iterator.hasNext()){
+			Pizza p = iterator.next();
+			if(p.getCode().equals(codePizza)){
+				pizzaTrouver = p;
+			}
+		}
+		
+		return pizzaTrouver;
 	}
 
 	@Override
 	public boolean pizzaExists(String codePizza) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean trouver = false;
+		Iterator<Pizza> iterator = lesPizzas.iterator(); 
+		
+		while (iterator.hasNext()){
+			Pizza p = iterator.next();
+			if(p.getCode().equals(codePizza)){
+				trouver = true;
+			}
+		}
+		return trouver;
 	}
 
 }

@@ -1,20 +1,18 @@
-package pizzeria;
+package fr.pizzeria.console;
 
-import java.util.List;
 import java.util.Scanner;
 
-import fr.pizzeria.controleur.PizzaMemDao;
 import fr.pizzeria.model.Pizza;
 
-public class PizzeriaConsole2 {
+public class PizzeriaConsole {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int reponse;
-		PizzaMemDao lesPizzas = new PizzaMemDao();
+		Pizza [] lesPizzas = new Pizza[100];
 		Scanner questionUser = new Scanner(System.in);
 		
-		lesPizzas.init();
+		initPizza(lesPizzas);
 		
 		do{
 			
@@ -28,15 +26,23 @@ public class PizzeriaConsole2 {
 		
 	}
 	
-	public static void initPizza(List <Pizza> lesPizzas){
-		lesPizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
-		lesPizzas.add(new Pizza("MAR", "Margherita", 14.00));
-		lesPizzas.add(new Pizza("REIN", "La Reine", 11.50));
-		lesPizzas.add(new Pizza("FRO", "La 4 fromages", 12.00));
-		lesPizzas.add(new Pizza("CAN", "La cannibale", 12.50));
-		lesPizzas.add(new Pizza("SAV", "La savoyarde", 13.00));
-		lesPizzas.add(new Pizza("ORI", "L’orientale", 13.50));
-		lesPizzas.add(new Pizza("IND", "L’indienne", 14.00));
+	public static void initPizza(Pizza [] lesPizzas){
+		Pizza p1 = new Pizza("PEP", "Pépéroni", 12.50);
+		lesPizzas[0] = p1;
+		Pizza p2 = new Pizza("MAR", "Margherita", 14.00);
+		lesPizzas[1] = p2;
+		Pizza p3 = new Pizza("REIN", "La Reine", 11.50);
+		lesPizzas[2] = p3;
+		Pizza p4 = new Pizza("FRO", "La 4 fromages", 12.00);
+		lesPizzas[3] = p4;
+		Pizza p5 = new Pizza("CAN", "La cannibale", 12.50);
+		lesPizzas[4] = p5;
+		Pizza p6 = new Pizza("SAV", "La savoyarde", 13.00);
+		lesPizzas[5] = p6;
+		Pizza p7 = new Pizza("ORI", "L’orientale", 13.50);
+		lesPizzas[6] = p7;
+		Pizza p8 = new Pizza("IND", "L’indienne", 14.00);
+		lesPizzas[7] = p8;
 	}
 	
 	public static void afficherMenu(){
@@ -48,7 +54,7 @@ public class PizzeriaConsole2 {
 		System.out.println("99. Sortir");
 	}
 	
-	public static void reponse(int r, PizzaMemDao lesPizzas, Scanner questionUser){
+	public static void reponse(int r, Pizza [] lesPizzas, Scanner questionUser){
 		String code;
 		String nom;
 		double prix;
@@ -57,8 +63,10 @@ public class PizzeriaConsole2 {
 		switch (r) {
 		case 1:
 			System.out.println("Liste des pizzas");
-			for(Pizza p : lesPizzas.findAllPizzas()){
-					System.out.println(p);
+			for(int i = 0; i < Pizza.getCompteur() ; i++){
+				if(lesPizzas[i] != null){
+					System.out.println(lesPizzas[i]);
+				}
 			};
 			break;
 		case 2:
@@ -69,7 +77,7 @@ public class PizzeriaConsole2 {
 			nom = questionUser.next();
 			System.out.println("Veuillez saisir le prix : ");
 			prix = questionUser.nextDouble();
-			lesPizzas.findAllPizzas().add(new Pizza(code, nom, prix));
+			lesPizzas[Pizza.getCompteur()] = new Pizza(code, nom, prix);
 			break;
 		case 3:
 			System.out.println("Mise à jour d’une pizza");
@@ -77,13 +85,13 @@ public class PizzeriaConsole2 {
 			code = questionUser.next();
 			
 			do{
-				if(code.equals(lesPizzas.findAllPizzas().get(j).getCode())){
+				if(code.equals(lesPizzas[j].getCode())){
 					System.out.println("Veuillez saisir le code : ");
-					lesPizzas.findAllPizzas().get(j).setCode(questionUser.next());
+					lesPizzas[j].setCode(questionUser.next());
 					System.out.println("Veuillez saisir le nom (sans espace) : ");
-					lesPizzas.findAllPizzas().get(j).setLibelle(questionUser.next());
+					lesPizzas[j].setLibelle(questionUser.next());
 					System.out.println("Veuillez saisir le prix : ");
-					lesPizzas.findAllPizzas().get(j).setPrix(questionUser.nextDouble());
+					lesPizzas[j].setPrix(questionUser.nextDouble());
 					trouver = true;
 				}
 				j++;
@@ -91,14 +99,16 @@ public class PizzeriaConsole2 {
 			break;
 		case 4:
 			System.out.println("Suppression d’une pizza");
-			for(Pizza p : lesPizzas.findAllPizzas()){
-				System.out.println(p);
-		};
+			for(int i = 0; i < Pizza.getCompteur() ; i++){
+				if(lesPizzas[i] != null){
+					System.out.println(lesPizzas[i]);
+				}
+			};
 			System.out.println("Veuillez choisir le code de la pizza à supprimer : ");
 			code = questionUser.next();
 			do{
-				if(code.equals(lesPizzas.findAllPizzas().get(j).getCode())){
-					lesPizzas.findAllPizzas().remove(j);
+				if(code.equals(lesPizzas[j].getCode())){
+					lesPizzas[j] = null;
 					trouver = true;
 				}
 				j++;
