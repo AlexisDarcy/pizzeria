@@ -2,8 +2,8 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-import fr.pizzeria.controleur.IPizzaDao;
-import fr.pizzeria.controleur.PizzaMemDao;
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaMemDao;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
 

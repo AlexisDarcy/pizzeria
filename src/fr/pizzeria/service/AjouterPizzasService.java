@@ -2,7 +2,7 @@ package fr.pizzeria.service;
 
 import java.util.Scanner;
 
-import fr.pizzeria.controleur.IPizzaDao;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzasService extends MenuService {

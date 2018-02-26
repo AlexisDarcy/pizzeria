@@ -1,4 +1,4 @@
-package fr.pizzeria.controleur;
+package fr.pizzeria.dao;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package fr.pizzeria.controleur;
+package fr.pizzeria.dao;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,7 +34,6 @@ public class PizzaMemDao implements IPizzaDao {
 	@Override
 	public void saveNewPizza(Pizza pizza) {
 		lesPizzas.add(pizza);
-		
 	}
 
 	@Override
