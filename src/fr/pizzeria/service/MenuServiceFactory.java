@@ -1,7 +1,21 @@
 package fr.pizzeria.service;
 
+import fr.pizzeria.exception.PizzaException;
+
+/**
+ * Factory Qui retourne une instance de {@link MenuService}
+ * @author ETY0009
+ *
+ */
 public class MenuServiceFactory {
-	public static MenuService getInstance(int choix) {
+	
+	/**
+	 * Redirige vers le bon service est throws l'execption via la class PizzaException
+	 * @param choix
+	 * @return MenuService
+	 * @throws PizzaException
+	 */
+	public static MenuService getInstance(int choix) throws PizzaException {
 		MenuService mS = null;  
 		
 		switch (choix) {
@@ -20,7 +34,10 @@ public class MenuServiceFactory {
 		case 99:
 			mS = new QuitterPizzaService();
 			break;
+		default :
+			throw new PizzaException("Une erreur est survenu lors de la saisie");
 		}
 		return mS;	
 	}
+	
 }

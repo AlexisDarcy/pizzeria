@@ -4,13 +4,15 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaMemDao;
+import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
 
 public class PizzeriaConsole2 {
 
 	public static void main(String[] args) {
-		int reponse;
+		String reponse;
+		int choix = 0; 
 		IPizzaDao lesPizzas = new PizzaMemDao();
 		Scanner questionUser = new Scanner(System.in);
 		
@@ -19,11 +21,22 @@ public class PizzeriaConsole2 {
 		do{
 			
 			afficherMenu();
-			reponse = questionUser.nextInt();
-			MenuService mS = MenuServiceFactory.getInstance(reponse);
-			mS.executeUC(lesPizzas, questionUser);
+			MenuService mS;
+			try{
+				reponse = questionUser.next();
+				choix = Integer.parseInt(reponse);
+				try {
+					mS = MenuServiceFactory.getInstance(choix);
+					mS.executeUC(lesPizzas, questionUser);
+				} catch (PizzaException e) {
+					System.err.println(e.getMessage());
+				}
+			} catch (NumberFormatException e) {
+				System.err.println("Une erreur est survenu lors de la saisie");
+			}
+
 			
-		}while(reponse != 99);
+		}while(choix != 99);
 		
 		questionUser.close();
 		
