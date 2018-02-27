@@ -11,15 +11,13 @@ import java.lang.reflect.Field;
  */
 public final class StringUtils {
 	
-	
-	/** Constructeur bloqué car classe utilitaire
+	/** Constructeur bloqué car classe s
 	 * 
 	 */
 	private StringUtils() {
 		super();
 	}
 
-	
 	/**Méthode qui convertie un objet en chaine de caractères.<br>
 	 * Cette conversion est fait sur la base de l'annotation @ToString
 	 * @param object  : Object a convertir
