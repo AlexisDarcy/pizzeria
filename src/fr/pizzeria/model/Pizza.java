@@ -1,4 +1,8 @@
 package fr.pizzeria.model;
+
+import fr.pizzeria.utils.StringUtils;
+import fr.pizzeria.utils.ToString;
+
 /**
  * Objet pizza
  * @author Alexis Darcy
@@ -9,14 +13,18 @@ public class Pizza {
 	/**id : int*/
 	private int id;
 	/**code : String*/
+	@ToString(separateur = " -> ", upperCase = true )
 	private String code;
 	/**libelle : String*/
+	@ToString (separateur = " (", upperCase = false )
 	private String libelle;
 	/**prix : double*/
+	@ToString(separateur = " €) -> ", upperCase = false)
 	private double prix;
 	/**compteur : int*/
 	private static int compteur = 0;
 	/**categorie : CategoriePizza*/
+	@ToString(separateur = ".",  upperCase = false)
 	private CategoriePizza categorie;
 	
 	/**
@@ -126,7 +134,7 @@ public class Pizza {
 	 */
 	@Override
 	public String toString() {
-		return " " + code + " -> " + libelle + " ( " + prix + " € ) -> " + categorie.getCategorie();
+		return StringUtils.getStringValue(this);
 	}
 	
 }
