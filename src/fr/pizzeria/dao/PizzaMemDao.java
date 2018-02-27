@@ -4,28 +4,35 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
-
+/**
+ * 
+ * @author Alexis Darcy
+ *
+ */
 public class PizzaMemDao implements IPizzaDao {
-	
+
+	/**lesPizzas : List<Pizza>*/
 	private List <Pizza> lesPizzas = new ArrayList<Pizza>();
 	
+	/** Constructeur  */
 	public PizzaMemDao() {
 		super();
 	}
-
+	
 	@Override
 	public void init() {
-		lesPizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
-		lesPizzas.add(new Pizza("MAR", "Margherita", 14.00));
-		lesPizzas.add(new Pizza("REIN", "La Reine", 11.50));
-		lesPizzas.add(new Pizza("FRO", "La 4 fromages", 12.00));
-		lesPizzas.add(new Pizza("CAN", "La cannibale", 12.50));
-		lesPizzas.add(new Pizza("SAV", "La savoyarde", 13.00));
-		lesPizzas.add(new Pizza("ORI", "L’orientale", 13.50));
-		lesPizzas.add(new Pizza("IND", "L’indienne", 14.00));
+		lesPizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
+		lesPizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE));
+		lesPizzas.add(new Pizza("REIN", "La Reine", 11.50, CategoriePizza.VIANDE));
+		lesPizzas.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
+		lesPizzas.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
+		lesPizzas.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
+		lesPizzas.add(new Pizza("ORI", "L’orientale", 13.50, CategoriePizza.VIANDE));
+		lesPizzas.add(new Pizza("IND", "L’indienne", 14.00, CategoriePizza.POISSON));
 	}
-
+	
 	@Override
 	public List<Pizza> findAllPizzas() {
 		return lesPizzas;
@@ -43,6 +50,7 @@ public class PizzaMemDao implements IPizzaDao {
 		p.setCode(pizza.getCode());
 		p.setLibelle(pizza.getLibelle());
 		p.setPrix(pizza.getPrix());
+		p.setCategorie(pizza.getCategorie());
 	}
 
 	@Override
@@ -86,4 +94,17 @@ public class PizzaMemDao implements IPizzaDao {
 		return trouver;
 	}
 
+	@Override
+	public boolean categorieExists(CategoriePizza cat) {
+		boolean trouver = false;
+		int i = 0;
+		CategoriePizza[] listCat = CategoriePizza.values(); 
+		do{
+			if(cat.getCategorie().equals(listCat[i].getCategorie())){
+				trouver = true;
+			}
+			i++;
+		}while(trouver == false);
+		return trouver;
+	}
 }

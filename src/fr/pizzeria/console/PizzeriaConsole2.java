@@ -23,7 +23,7 @@ public class PizzeriaConsole2 {
 			afficherMenu();
 			MenuService mS;
 			try{
-				reponse = questionUser.next();
+				reponse = questionUser.nextLine();
 				choix = Integer.parseInt(reponse);
 				try {
 					mS = MenuServiceFactory.getInstance(choix);
