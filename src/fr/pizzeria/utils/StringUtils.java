@@ -9,7 +9,22 @@ import java.lang.reflect.Field;
  * @author Alexis Darcy
  *
  */
-public class StringUtils {
+public final class StringUtils {
+	
+	
+	/** Constructeur bloqué car classe utilitaire
+	 * 
+	 */
+	private StringUtils() {
+		super();
+	}
+
+	
+	/**Méthode qui convertie un objet en chaine de caractères.<br>
+	 * Cette conversion est fait sur la base de l'annotation @ToString
+	 * @param object  : Object a convertir
+	 * @return String
+	 */
 	public static String getStringValue(Object object) {
 		String chaine = "";
 		try{
