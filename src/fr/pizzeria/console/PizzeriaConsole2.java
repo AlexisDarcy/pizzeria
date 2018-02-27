@@ -48,6 +48,7 @@ public class PizzeriaConsole2 {
 		System.out.println("2. Ajouter une nouvelle pizza");
 		System.out.println("3. Mettre à jour une pizza");
 		System.out.println("4. Supprimer une pizza");
+		System.out.println("5. Créer le menu en pdf");
 		System.out.println("99. Sortir");
 	}
 	
