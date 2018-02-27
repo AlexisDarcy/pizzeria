@@ -15,12 +15,15 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import fr.pizzeria.model.Pizza;
 
-/**
+/**Classe permettant de créer un pdf
  * @author Alexis Darcy
  *
  */
 public class PDFGenerator {
 
+    /**Créer un pdf de la liste des pizzas
+     * @param lesPizzas : List<Pizza>
+     */
     public static void PDFCreator(List<Pizza> lesPizzas) {
 
         Document document = new Document();
