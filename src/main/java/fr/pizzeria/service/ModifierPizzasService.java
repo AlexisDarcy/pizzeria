@@ -2,6 +2,9 @@ package fr.pizzeria.service;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
@@ -11,6 +14,8 @@ import fr.pizzeria.model.Pizza;
  * @author Alexis Darcy
  */
 public class ModifierPizzasService extends MenuService {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(ModifierPizzasService.class);
 	
 	/**
 	 * redefinition de la classe executeUC de la classe 
@@ -28,8 +33,8 @@ public class ModifierPizzasService extends MenuService {
 		String strCat;
 		CategoriePizza cat;
 		double prix;
-		System.out.println("Mise à jour d’une pizza");
-		System.out.println("Veuillez choisir le code de la pizza à modifier : ");
+		System.out.println("Mise Ã  jour d'une pizza");
+		System.out.println("Veuillez choisir le code de la pizza Ã  modifier : ");
 		codeRechercher = questionUser.nextLine();	
 		try{
 			if(lesPizzas.pizzaExists(codeRechercher)){
@@ -42,18 +47,22 @@ public class ModifierPizzasService extends MenuService {
 				prix = Double.parseDouble(strPrix);
 				System.out.println("Veuillez saisir une categorie : ");
 				strCat = questionUser.nextLine().toUpperCase().trim();
-				cat = CategoriePizza.valueOf(strCat.replaceFirst(" ", "_"));
-				if(lesPizzas.categorieExists(cat)){
-						lesPizzas.updatePizza(codeRechercher, new Pizza(code, nom, prix, cat));
+				strCat = strCat.replaceFirst(" ", "_");
+				if(lesPizzas.categorieExists(strCat)){
+					cat = CategoriePizza.valueOf(strCat);
+					lesPizzas.updatePizza(codeRechercher, new Pizza(code, nom, prix, cat));
 				} else {
-					throw new UpdatePizzaException("La catégorie n'existe déjà");
+					LOG.error("La catÃ©gorie n'existe pas");
+					throw new UpdatePizzaException("La catÃ©gorie n'existe pas");
 				}
 			}else{
+				LOG.error("La pizza n'existe pas !!!");
 				throw new UpdatePizzaException("La pizza n'existe pas !!!");
 			}
 
 		} catch (NumberFormatException e) {
-			System.err.println("Une erreur est survenu lors de la saisie");
+			LOG.error("Une erreur est survenu lors de la saisie");
+			throw new UpdatePizzaException("Une erreur est survenu lors de la saisie");
 		}
 	}
 }

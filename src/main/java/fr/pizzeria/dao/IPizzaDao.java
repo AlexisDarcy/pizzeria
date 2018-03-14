@@ -2,7 +2,6 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
-import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 /**
  * Interface permettent la gestion des pizzas
@@ -36,14 +35,14 @@ public interface IPizzaDao {
 	 * @return une pizza
 	 */
 	Pizza findPizzaByCode(String codePizza);
-	/**Vérifie si la pizza existe 
+	/**Vï¿½rifie si la pizza existe 
 	 * @param codePizza : String
 	 * @return un boolean
 	 */
 	boolean pizzaExists(String codePizza);
-	/**Vérifie si la categorie existe 
-	 * @param cat : CategoriePizza
+	/**Vï¿½rifie si la categorie existe 
+	 * @param cat : String
 	 * @return un boolean
 	 */
-	boolean categorieExists(CategoriePizza cat);
+	boolean categorieExists(String cat);
 }

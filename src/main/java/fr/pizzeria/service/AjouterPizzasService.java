@@ -2,15 +2,21 @@ package fr.pizzeria.service;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
+
 /**
  * Classe permettant l'ajout d'une pizza
  * @author Alexis Darcy
  */
 public class AjouterPizzasService extends MenuService {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(AjouterPizzasService.class);
 	
 	/**
 	 * redefinition de la classe executeUC de la classe 
@@ -28,7 +34,7 @@ public class AjouterPizzasService extends MenuService {
 		CategoriePizza cat;
 		double prix;
 		try{
-			System.out.println("Ajout díune nouvelle pizza\n");
+			System.out.println("Ajout d'une nouvelle pizza\n");
 			System.out.println("Veuillez saisir le code : ");
 			code = questionUser.nextLine();
 			System.out.println("Veuillez saisir le nom (sans espace) : ");
@@ -38,19 +44,23 @@ public class AjouterPizzasService extends MenuService {
 			prix = Double.parseDouble(strPrix);
 			System.out.println("Veuillez saisir une categorie : ");
 			strCat = questionUser.nextLine().toUpperCase().trim();
-			cat = CategoriePizza.valueOf(strCat.replaceFirst(" ", "_"));
-			if(lesPizzas.categorieExists(cat)){
+			strCat = (strCat.replaceFirst(" ", "_"));
+			if(lesPizzas.categorieExists(strCat)){
+				cat = CategoriePizza.valueOf(strCat);
 				if(!lesPizzas.pizzaExists(code)){
 					lesPizzas.saveNewPizza(new Pizza(code, nom, prix, cat));
 				} else {
-					throw new SavePizzaException("La pizza existe dÈj‡");
+					LOG.error("La pizza existe d√©j√†");
+					throw new SavePizzaException("La pizza existe d√©j√†");
 				}
 			} else {
-				throw new SavePizzaException("La catÈgorie n'existe dÈj‡");
+				LOG.error("La cat√©gorie n'existe pas");
+				throw new SavePizzaException("La cat√©gorie n'existe pas");
 			}
 
 		} catch (NumberFormatException e) {
-			System.err.println("Une erreur est survenu lors de la saisie");
+			LOG.error("erreur dans la saisie du prix");
+			throw new SavePizzaException("erreur dans la saisie du prix");
 		}
 	}
 }
