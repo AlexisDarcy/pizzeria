@@ -3,6 +3,8 @@
  */
 package fr.pizzeria.service;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaMemDao;
 import fr.pizzeria.exception.PizzaException;
 
 /**
@@ -55,8 +58,17 @@ public class ListerPizzasServiceTest {
 	 */
 	@Test
 	public void testExecuteUC() {
-		
-	
+		IPizzaDao lesPizzas = new PizzaMemDao();
+		lesPizzas.init();
+		Scanner questionUser = new Scanner(System.in);
+		MenuService mS;
+		try {
+			mS = MenuServiceFactory.getInstance(1);
+			mS.executeUC(lesPizzas, questionUser);
+		} catch (PizzaException e) {
+			// TODO Auto-generated catch block
+			fail("une erreur est survrnue");
+		}	
 	}
 	
 	@Test(expected = PizzaException.class)

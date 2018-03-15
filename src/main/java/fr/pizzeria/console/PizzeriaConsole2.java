@@ -3,7 +3,7 @@ package fr.pizzeria.console;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaMemDao;
+import fr.pizzeria.dao.PizzaJdbcDao;
 import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
@@ -13,10 +13,8 @@ public class PizzeriaConsole2 {
 	public static void main(String[] args) {
 		String reponse;
 		int choix = 0; 
-		IPizzaDao lesPizzas = new PizzaMemDao();
+		IPizzaDao lesPizzas = new PizzaJdbcDao();
 		Scanner questionUser = new Scanner(System.in);
-		
-		lesPizzas.init();
 		
 		do{
 			
@@ -49,6 +47,7 @@ public class PizzeriaConsole2 {
 		System.out.println("3. Mettre à jour une pizza");
 		System.out.println("4. Supprimer une pizza");
 		System.out.println("5. Créer le menu en pdf");
+		System.out.println("6. Enregistrer le menu dans la base de données");
 		System.out.println("99. Sortir");
 	}
 	

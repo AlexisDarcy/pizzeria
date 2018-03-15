@@ -19,7 +19,7 @@ public class Pizza {
 	@ToString (separateur = " (", upperCase = true )
 	private String libelle;
 	/**prix : double*/
-	@ToString(separateur = " €) -> ", upperCase = false)
+	@ToString(separateur = " â‚¬) -> ", upperCase = false)
 	private double prix;
 	/**compteur : int*/
 	private static int compteur = 0;

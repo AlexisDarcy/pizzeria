@@ -34,6 +34,9 @@ public class MenuServiceFactory {
 		case 5:
 			mS = new EnregistrerPDFService();
 			break;
+		case 6:
+			mS = new EnregistrerLeMenuService();
+			break;
 		case 99:
 			mS = new QuitterPizzaService();
 			break;
