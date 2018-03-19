@@ -27,6 +27,16 @@ public class PizzaJdbcDao implements IPizzaDao {
 		connect = ConnexionBDD.getConnexion();
 	}
 
+	public boolean close(){
+		boolean testCO = false;
+		try {
+			ConnexionBDD.close();
+			testCO = connect.isClosed();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return testCO;
+	}
 	/* (non-Javadoc)
 	 * @see fr.pizzeria.dao.IPizzaDao#init()
 	 */
