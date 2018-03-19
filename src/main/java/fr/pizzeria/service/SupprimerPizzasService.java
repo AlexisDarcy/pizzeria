@@ -37,6 +37,5 @@ public class SupprimerPizzasService extends MenuService{
 			LOG.error("La pizza n'existe pas !!!");
 			throw new DeletePizzaException("La pizza n'existe pas !!!");
 		}
-		lesPizzas.deletePizza(codeRechercher);
 	}
 }

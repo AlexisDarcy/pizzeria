@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaJdbcDao;
+import fr.pizzeria.dao.PizzaJpaDao;
 import fr.pizzeria.exception.PizzaException;
 import fr.pizzeria.service.MenuService;
 import fr.pizzeria.service.MenuServiceFactory;
@@ -13,7 +14,7 @@ public class PizzeriaConsole2 {
 	public static void main(String[] args) {
 		String reponse;
 		int choix = 0; 
-		IPizzaDao lesPizzas = new PizzaJdbcDao();
+		IPizzaDao lesPizzas = new PizzaJpaDao();
 		Scanner questionUser = new Scanner(System.in);
 		
 		do{

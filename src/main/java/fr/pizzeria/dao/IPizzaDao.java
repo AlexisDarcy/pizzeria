@@ -44,5 +44,7 @@ public interface IPizzaDao {
 	 * @param cat : String
 	 * @return un boolean
 	 */
-	boolean categorieExists(String cat);
+	boolean categorieExists(String strCat);
+	
+	void close();
 }

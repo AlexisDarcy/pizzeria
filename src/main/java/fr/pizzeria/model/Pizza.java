@@ -1,32 +1,61 @@
 package fr.pizzeria.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import fr.pizzeria.utils.StringUtils;
 import fr.pizzeria.utils.ToString;
 
 /**
  * Objet pizza
  * @author Alexis Darcy
- *
  */
+@Entity
+@Table(name = "pizza")
 public class Pizza {
 	
 	/**id : int*/
+	@Id
+	@Column(name = "ID_PIZZA")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	/**code : String*/
+	@Column(name = "CODE", nullable = false, unique = true)
 	@ToString(separateur = " -> ", upperCase = true )
 	private String code;
+	
 	/**libelle : String*/
+	@Column(name = "LIBELLE", nullable = false)
 	@ToString (separateur = " (", upperCase = true )
 	private String libelle;
+	
 	/**prix : double*/
+	@Column(name = "PRIX", nullable = false)
 	@ToString(separateur = " €) -> ", upperCase = false)
 	private double prix;
-	/**compteur : int*/
-	private static int compteur = 0;
+	
 	/**categorie : CategoriePizza*/
+	@Column(name = "CATEGORIE", nullable = false)
+	@Enumerated(EnumType.STRING)
 	@ToString(separateur = ".",  upperCase = false)
 	private CategoriePizza categorie;
 	
+	/**compteur : int*/
+	private static int compteur = 0;
+	
+	/**
+	 * Constructeur
+	 */
+	public Pizza() {
+	}
+
 	/**
 	 * Constructeur
 	 * @param code chaine de characteur
@@ -40,7 +69,6 @@ public class Pizza {
 		this.libelle = libelle;
 		this.prix = prix;
 		this.categorie = categorie;
-		compteur++;
 	}
 	
 	/**

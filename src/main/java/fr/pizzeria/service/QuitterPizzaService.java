@@ -17,7 +17,7 @@ public class QuitterPizzaService extends MenuService {
 	 */
 	@Override
 	public void executeUC(IPizzaDao lesPizzas, Scanner questionUser) {
-		
+		lesPizzas.close();
 		System.out.println("Aurevoir ☹");
 	}
 

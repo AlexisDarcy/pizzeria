@@ -110,4 +110,13 @@ public class PizzaMemDao implements IPizzaDao {
 		return trouver;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.pizzeria.dao.IPizzaDao#close()
+	 */
+	@Override
+	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
